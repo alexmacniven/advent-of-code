@@ -1,15 +1,14 @@
 [tool.poetry]
 name = "pythonproject2"
-version = "0.1.0"
+version = "21.2.0"
 description = "A project hosting solutions for advent of code."
 authors = ["Alex Macniven <alex_macniven@icloud.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
-black = "^21.11b1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
