@@ -18,18 +18,18 @@ def course() -> List[str]:
 
 
 def test_calc_final_position(course: List[str]) -> None:
-    expecting: List[int] = [15, 10]
+    expecting: List[int] = [15, 10, 60]
     actual: List[int] = calc_final_position(course)
     assert actual == expecting
 
 
 def test_multiply_position() -> None:
-    expecting: int = 150
-    actual: int = multiply_position([15, 10])
+    expecting: int = 900
+    actual: int = multiply_position([15, 10, 60])
     assert actual == expecting
 
 
 def test_main(course: List[str]) -> None:
-    expecting: int = 150
+    expecting: int = 900
     actual: int = main(course)
     assert actual == expecting

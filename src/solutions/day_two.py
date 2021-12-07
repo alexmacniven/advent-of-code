@@ -7,6 +7,7 @@ def update_position(instruction: List[str], position: List[int]) -> List[int]:
     match instruction:
         case ["forward", steps]:
             position[0] += int(steps)
+            calc_depth(position, int(steps))
         case ["down", steps]:
             position[1] += int(steps)
         case ["up", steps]:
@@ -14,15 +15,20 @@ def update_position(instruction: List[str], position: List[int]) -> List[int]:
     return position
 
 
+def calc_depth(position: List[int], steps: int) -> List[int]:
+    position[2] += position[1] * steps
+    return position
+
+
 def calc_final_position(course: List[str]) -> List[int]:
-    position: List[int] = [0, 0]
+    position: List[int] = [0, 0, 0]
     for instruction in course:
         update_position(instruction.split(' '), position)
     return position
 
 
 def multiply_position(position: List[int]) -> int:
-    return prod(position)
+    return position[0] * position[2]
 
 
 def main(course: List[str]) -> int:
