@@ -2,7 +2,7 @@ from typing import List
 
 import pytest
 
-from src.solutions.day_four import part_one
+from src.solutions.day_four import part_one, part_two
 
 
 @pytest.fixture
@@ -14,7 +14,7 @@ def drawn() -> List[int]:
 def boards() -> List[List[List[int]]]:
     return [
         [
-            [22, 13,17,11, 0],
+            [22, 13, 17, 11, 0],
             [8, 2, 23, 4, 24],
             [21, 9, 14, 16, 7],
             [6, 10, 3, 18, 5],
@@ -39,3 +39,7 @@ def boards() -> List[List[List[int]]]:
 
 def test_part_one(drawn: List[int], boards: List[List[List[int]]]):
     assert part_one(drawn, boards) == 4512
+
+
+def test_part_two(drawn: List[int], boards: List[List[List[int]]]):
+    assert part_two(drawn, boards) == 1924

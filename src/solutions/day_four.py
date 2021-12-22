@@ -31,11 +31,13 @@ class Board:
     rows: List[List[int]]
     blotted: int
     last_blotted: int
+    complete: bool
 
     def __init__(self, rows_: List[List[int]]):
         self.rows = rows_
         self.blotted = 0
         self.last_blotted = -1
+        self.complete = False
 
     @property
     def columns(self) -> List[List[int]]:
@@ -69,9 +71,21 @@ def part_one(drawn_numbers_: List[int], boards_: List[List[List[int]]]) -> int:
     for number in drawn_numbers_:
         for board in board_list:
             board.blot(number)
-            if board.blotted >= 5:  # TODO: Join these if statements with 'and'
-                if any((board.check_winning_rows(), board.check_winning_columns())):
-                    return board.calculate_score()
+            if board.blotted >= 5 and any((board.check_winning_rows(), board.check_winning_columns())):
+                return board.calculate_score()
+
+
+def part_two(drawn_numbers_: List[int], boards_: List[List[List[int]]]) -> int:
+    board_list: Sequence[Board] = [Board(rows) for rows in boards_]
+    for number in drawn_numbers_:
+        for board in board_list:
+            if not board.complete:
+                board.blot(number)
+                if board.blotted >= 5 and any((board.check_winning_rows(), board.check_winning_columns())):
+                    board.complete = True
+                    board_score: int = board.calculate_score()
+        if all([board.complete for board in board_list]):
+            return board_score
 
 
 if __name__ == "__main__":
@@ -80,3 +94,4 @@ if __name__ == "__main__":
     draws: List[int] = _load_draws(resource.joinpath("draws.txt"))
     boards: List[List[List[int]]] = _load_boards(resource.joinpath("boards.txt"))
     print(f"Part One: {part_one(draws, boards)}")
+    print(f"Part Two: {part_two(draws, boards)}")
